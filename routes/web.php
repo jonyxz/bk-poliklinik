@@ -42,24 +42,12 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function () 
         Route::delete('/{id}', [JadwalPeriksaController::class, 'destroy'])->name('dokter.jadwal_periksa.destroy');
         Route::patch('/jadwal_periksa/{id}/toggle-status', [JadwalPeriksaController::class, 'toggleStatus'])->name('dokter.jadwal_periksa.toggleStatus');
     });
-
-    // Route::prefix('profile')->group(function () {
-    //     Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
-    //     Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
-    //     Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // });
 });
 
 Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->group(function () {
     Route::get('/dashboard', function () {
         return view('pasien.dashboard');
     })->name('pasien.dashboard');
-
-    // Route::prefix('profile')->group(function () {
-    //     Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
-    //     Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
-    //     Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // });
 });
 
 require __DIR__.'/auth.php';
