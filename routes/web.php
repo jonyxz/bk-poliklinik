@@ -40,6 +40,7 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function () 
         Route::get('/{id}/edit', [JadwalPeriksaController::class, 'edit'])->name('dokter.jadwal_periksa.edit');
         Route::patch('/{id}', [JadwalPeriksaController::class, 'update'])->name('dokter.jadwal_periksa.update');
         Route::delete('/{id}', [JadwalPeriksaController::class, 'destroy'])->name('dokter.jadwal_periksa.destroy');
+        Route::patch('/jadwal_periksa/{id}/toggle-status', [JadwalPeriksaController::class, 'toggleStatus'])->name('dokter.jadwal_periksa.toggleStatus');
     });
 
     // Route::prefix('profile')->group(function () {

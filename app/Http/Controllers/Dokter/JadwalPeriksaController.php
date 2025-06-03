@@ -71,6 +71,16 @@ class JadwalPeriksaController extends Controller
         return redirect()->route('dokter.jadwal_periksa.index')->with('success', 'Jadwal periksa berhasil diperbarui.');
     }
 
+    public function toggleStatus($id)
+    {
+        $jadwalPeriksa = JadwalPeriksa::findOrFail($id);
+
+        $jadwalPeriksa->status = !$jadwalPeriksa->status;
+        $jadwalPeriksa->save();
+
+        return redirect()->route('dokter.jadwal_periksa.index')->with('success', 'Status jadwal berhasil diubah.');
+    }
+
     public function destroy($id)
     {
         $jadwalPeriksa = JadwalPeriksa::findOrFail($id);
