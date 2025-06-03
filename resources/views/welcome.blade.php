@@ -15,27 +15,25 @@
     </head>
     <body class="bg-blue-50 text-gray-800 flex items-center justify-center min-h-screen">
         <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <header class="text-center mb-8">
-                <h1 class="text-3xl font-bold text-blue-600">Selamat Datang di Poliklinik</h1>
+            <header class="text-center mb-12">
+                <h1 class="text-3xl font-semibold">Selamat Datang di Poliklinik</h1>
                 <p class="text-gray-600 mt-2">Silakan login sebagai dokter atau daftar sebagai pasien untuk memulai.</p>
             </header>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Login Dokter -->
                 <div class="bg-blue-100 p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold text-blue-600">Login sebagai Dokter</h2>
-                    <p class="text-gray-600 mt-2">Masuk untuk mengelola jadwal periksa </p>
-                    <a href="{{ route('login') }}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                        Login Dokter
+                    <a href="{{ route('login') }}">
+                        <h2 class="text-xl font-semibold">Login sebagai Dokter</h2>
+                        <p class="text-gray-600 mt-2">Masuk untuk mengelola jadwal periksa </p>
                     </a>
                 </div>
 
                 <!-- Daftar Pasien -->
                 <div class="bg-blue-100 p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold text-blue-600">Daftar sebagai Pasien</h2>
-                    <p class="text-gray-600 mt-2">Buat akun untuk mendaftar sebagai pasien dan mengakses layanan poliklinik.</p>
-                    <a href="{{ route('register') }}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                        Daftar Pasien
+                    <a href="{{ route('register') }}">
+                        <h2 class="text-xl font-semibold">Daftar sebagai Pasien</h2>
+                        <p class="text-gray-600 mt-2">Buat akun untuk mendaftar sebagai pasien dan mengakses layanan poliklinik.</p>
                     </a>
                 </div>
             </div>
