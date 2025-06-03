@@ -18,9 +18,9 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="nama" :value="__('Nama')" />
+            <x-text-input id="nama" name="nama" type="text" class="mt-1 block w-full" :value="old('nama', $user->nama)" required autofocus autocomplete="nama" />
+            <x-input-error class="mt-2" :messages="$errors->get('nama')" />
         </div>
 
         <div>
@@ -46,6 +46,40 @@
                 </div>
             @endif
         </div>
+
+        <div>
+            <x-input-label for="alamat" :value="__('Alamat')" />
+            <x-text-input id="alamat" name="alamat" type="text" class="mt-1 block w-full" :value="old('alamat', $user->alamat)" required autocomplete="alamat" />
+            <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
+        </div>
+
+        <div>
+            <x-input-label for="no_ktp" :value="__('No KTP')" />
+            <x-text-input id="no_ktp" name="no_ktp" type="text" class="mt-1 block w-full" :value="old('no_ktp', $user->no_ktp)" required autocomplete="no_ktp" />
+            <x-input-error class="mt-2" :messages="$errors->get('no_ktp')" />
+        </div>
+
+        <div>
+            <x-input-label for="no_hp" :value="__('No HP')" />
+            <x-text-input id="no_hp" name="no_hp" type="text" class="mt-1 block w-full" :value="old('no_hp', $user->no_hp)" required autocomplete="no_hp" />
+            <x-input-error class="mt-2" :messages="$errors->get('no_hp')" />
+        </div>
+
+        @if ($user->role === 'dokter')
+            <div>
+                <x-input-label for="poli" :value="__('Poli')" />
+                <x-text-input id="poli" name="poli" type="text" class="mt-1 block w-full" :value="old('poli', $user->poli)" autocomplete="poli" />
+                <x-input-error class="mt-2" :messages="$errors->get('poli')" />
+            </div>
+        @endif
+
+        @if ($user->role === 'pasien')
+            <div>
+                <x-input-label for="no_rm" :value="__('No RM')" />
+                <x-text-input id="no_rm" name="no_rm" type="text" class="mt-1 block w-full" :value="old('no_rm', $user->no_rm)" autocomplete="no_rm" />
+                <x-input-error class="mt-2" :messages="$errors->get('no_rm')" />
+            </div>
+        @endif
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
