@@ -20,6 +20,21 @@
                     @if (Auth::user()->role == 'dokter')
                         <x-nav-link :href="route('dokter.dashboard')" :active="request()->routeIs('dokter.dashboard')">
                             {{ __('Dashboard') }}
+                                </x-nav-link>
+                            <x-nav-link :href="route('dokter.obat.index')" :active="request()->routeIs('dokter.obat.index')">
+                                {{ __('Obat') }}
+                            </x-nav-link>
+                    @elseif(Auth::user()->role == 'pasien')
+                            <x-nav-link :href="route('pasien.dashboard')" :active="request()->routeIs('pasien.dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
+                    @endif
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @if (Auth::user()->role == 'dokter')
+                        <x-nav-link :href="route('dokter.dashboard')" :active="request()->routeIs('dokter.dashboard')">
+                            {{ __('Dashboard') }}
                         </x-nav-link>
                     @elseif(Auth::user()->role == 'pasien')
                         <x-nav-link :href="route('pasien.dashboard')" :active="request()->routeIs('pasien.dashboard')">
