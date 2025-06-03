@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -24,17 +24,62 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'alamat' => 'required|string|max:255',
+            'no_ktp' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:50',
+        ]);
+
+        if ($user->role === 'dokter') {
+            $request->validate([
+                'poli' => 'nullable|string|max:50',
+            ]);
+        } elseif ($user->role === 'pasien') {
+            $request->validate([
+                'no_rm' => 'nullable|string|max:25',
+            ]);
         }
 
-        $request->user()->save();
+        $user->fill([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
+            'no_ktp' => $request->no_ktp,
+            'no_hp' => $request->no_hp,
+        ]);
+
+        if ($user->role === 'dokter') {
+            $user->poli = $request->poli;
+        } elseif ($user->role === 'pasien') {
+            $user->no_rm = $request->no_rm;
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Update the user's password.
+     */
+    public function updatePassword(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = $request->user();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'password-updated');
     }
 
     /**
