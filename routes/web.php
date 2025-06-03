@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dokter\ObatController;
+use App\Http\Controllers\Dokter\JadwalPeriksaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,12 +34,12 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function () 
     });
 
     Route::prefix('jadwal-periksa')->group(function () {
-        Route::get('/', [ObatController::class, 'jadwalPeriksaIndex'])->name('dokter.jadwal-periksa.index');
-        Route::get('/create', [ObatController::class, 'jadwalPeriksaCreate'])->name('dokter.jadwal-periksa.create');
-        Route::post('/', [ObatController::class, 'jadwalPeriksaStore'])->name('dokter.jadwal-periksa.store');
-        Route::get('/{id}/edit', [ObatController::class, 'jadwalPeriksaEdit'])->name('dokter.jadwal-periksa.edit');
-        Route::patch('/{id}', [ObatController::class, 'jadwalPeriksaUpdate'])->name('dokter.jadwal-periksa.update');
-        Route::delete('/{id}', [ObatController::class, 'jadwalPeriksaDestroy'])->name('dokter.jadwal-periksa.destroy');
+        Route::get('/', [JadwalPeriksaController::class, 'Index'])->name('dokter.jadwal_periksa.index');
+        Route::get('/create', [JadwalPeriksaController::class, 'create'])->name('dokter.jadwal_periksa.create');
+        Route::post('/', [JadwalPeriksaController::class, 'store'])->name('dokter.jadwal_periksa.store');
+        Route::get('/{id}/edit', [JadwalPeriksaController::class, 'edit'])->name('dokter.jadwal_periksa.edit');
+        Route::patch('/{id}', [JadwalPeriksaController::class, 'update'])->name('dokter.jadwal_periksa.update');
+        Route::delete('/{id}', [JadwalPeriksaController::class, 'destroy'])->name('dokter.jadwal_periksa.destroy');
     });
 
     // Route::prefix('profile')->group(function () {
