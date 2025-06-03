@@ -12,7 +12,10 @@ class JadwalPeriksaController extends Controller
 {
     public function index()
     {
-        $jadwalPeriksas = JadwalPeriksa::with('dokter')->get();
+        $jadwalPeriksas = JadwalPeriksa::with('dokter')
+            ->where('id_dokter', Auth::id())
+            ->get();
+    
         return view('dokter.jadwal_periksa.index', compact('jadwalPeriksas'));
     }
 
