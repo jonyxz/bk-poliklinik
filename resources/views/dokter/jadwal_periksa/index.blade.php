@@ -58,7 +58,7 @@
                                         {{ $jadwal->jam_selesai }}
                                     </td>
                                     <td class="align-middle text-start">
-                                        <span class="{{ $jadwal->status ? 'badge badge-pill bg-success' : 'badge badge-pill bg-danger' }}">
+                                        <span class="{{ $jadwal->status ? 'badge badge-pill bg-success px-4 py-2 rounded-full text-white' : 'badge badge-pill bg-danger px-4 py-2 rounded-full text-white' }}">
                                             {{ $jadwal->status ? 'Aktif' : 'Nonaktif' }}
                                         </span>
                                     </td>
