@@ -29,74 +29,78 @@
                             @endif
                         </div>
                     </header>
-
-                    <table class="table mt-6 overflow-hidden rounded table-hover">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Hari</th>
-                                <th scope="col">Jam Mulai</th>
-                                <th scope="col">Jam Selesai</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Aksi</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($jadwalPeriksas as $jadwal)
+                    <div class="table-responsive">
+                        <table class="table mt-6 overflow-hidden rounded table-hover">
+                            <thead class="thead-light">
                                 <tr>
-                                    <th scope="row" class="align-middle text-start">
-                                        {{ $loop->iteration }}
-                                    </th>
-                                    <td class="align-middle text-start">
-                                        {{ ucfirst($jadwal->hari) }}
-                                    </td>
-                                    <td class="align-middle text-start">
-                                        {{ $jadwal->jam_mulai }}
-                                    </td>
-                                    <td class="align-middle text-start">
-                                        {{ $jadwal->jam_selesai }}
-                                    </td>
-                                    <td class="align-middle text-start">
-                                        <span class="{{ $jadwal->status ? 'badge badge-pill bg-success px-4 py-2 rounded-full text-white' : 'badge badge-pill bg-danger px-4 py-2 rounded-full text-white' }}">
-                                            {{ $jadwal->status ? 'Aktif' : 'Nonaktif' }}
-                                        </span>
-                                    </td>
-                                    <td class="align-middle text-start">
-                                            <form action="{{ route('dokter.jadwal_periksa.toggleStatus', $jadwal->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('PATCH')
-                                                <button type="submit" class="btn btn-success btn-sm" {{ $jadwal->status ? 'disabled' : '' }}>
-                                                    Aktifkan
-                                                </button>
-                                            </form>
-                                            <form action="{{ route('dokter.jadwal_periksa.toggleStatus', $jadwal->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('PATCH')
-                                                <button type="submit" class="btn btn-danger btn-sm" {{ !$jadwal->status ? 'disabled' : '' }}>
-                                                    Nonaktifkan
-                                                </button>
-                                            </form>
-                                    </td>
-                                    <td class="flex items-center gap-3">
-                                        {{-- Button Edit --}}
-                                        <a href="{{ route('dokter.jadwal_periksa.edit', $jadwal->id) }}" class="btn btn-secondary btn-sm">
-                                            Edit
-                                        </a>
-                                    
-                                        {{-- Button Delete --}}
-                                        <form action="{{ route('dokter.jadwal_periksa.destroy', $jadwal->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus jadwal ini?')">
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </td>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Hari</th>
+                                    <th scope="col">Jam Mulai</th>
+                                    <th scope="col">Jam Selesai</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Aksi</th>
+                                    <th scope="col"></th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($jadwalPeriksas as $jadwal)
+                                    <tr>
+                                        <th scope="row" class="align-middle text-start">
+                                            {{ $loop->iteration }}
+                                        </th>
+                                        <td class="align-middle text-start">
+                                            {{ ucfirst($jadwal->hari) }}
+                                        </td>
+                                        <td class="align-middle text-start">
+                                            {{ $jadwal->jam_mulai }}
+                                        </td>
+                                        <td class="align-middle text-start">
+                                            {{ $jadwal->jam_selesai }}
+                                        </td>
+                                        <td class="align-middle text-start">
+                                            <span class="{{ $jadwal->status ? 'badge badge-pill bg-success px-4 py-2 rounded-full text-white' : 'badge badge-pill bg-danger px-4 py-2 rounded-full text-white' }}">
+                                                {{ $jadwal->status ? 'Aktif' : 'Nonaktif' }}
+                                            </span>
+                                        </td>
+                                        <td class="align-middle text-start">
+                                                <div class="flex items-center gap-2">
+                                                    <form action="{{ route('dokter.jadwal_periksa.toggleStatus', $jadwal->id) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button type="submit" class="btn btn-success btn-sm" {{ $jadwal->status ? 'disabled' : '' }}>
+                                                            Aktifkan
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('dokter.jadwal_periksa.toggleStatus', $jadwal->id) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button type="submit" class="btn btn-danger btn-sm" {{ !$jadwal->status ? 'disabled' : '' }}>
+                                                            Nonaktifkan
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                        </td>
+                                        <td class="flex items-center gap-2">
+                                            {{-- Button Edit --}}
+                                            <a href="{{ route('dokter.jadwal_periksa.edit', $jadwal->id) }}" class="btn btn-secondary btn-sm">
+                                                Edit
+                                            </a>
+                                        
+                                            {{-- Button Delete --}}
+                                            <form action="{{ route('dokter.jadwal_periksa.destroy', $jadwal->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus jadwal ini?')">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    
                 </section>
             </div>
         </div>
