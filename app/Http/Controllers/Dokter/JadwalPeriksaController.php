@@ -78,6 +78,13 @@ class JadwalPeriksaController extends Controller
     {
         $jadwalPeriksa = JadwalPeriksa::findOrFail($id);
 
+        if (!$jadwalPeriksa->status) {
+            $dokterId = $jadwalPeriksa->id_dokter;
+            JadwalPeriksa::where('id_dokter', $dokterId)
+                ->where('status', true)
+                ->update(['status' => false]);
+        }
+
         $jadwalPeriksa->status = !$jadwalPeriksa->status;
         $jadwalPeriksa->save();
 
