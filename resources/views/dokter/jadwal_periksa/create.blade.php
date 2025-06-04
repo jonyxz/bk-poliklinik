@@ -74,23 +74,6 @@
                             @enderror
                         </div>
 
-                        {{-- Status --}}
-                        <div class="mb-3 form-group">
-                            <label for="status">Status</label>
-                            <select
-                                class="rounded form-control"
-                                id="status"
-                                name="status"
-                                required
-                            >
-                                <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Aktif</option>
-                                <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Tidak Aktif</option>
-                            </select>
-                            @error('status')
-                                <span class="text-sm text-red-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-
                         {{-- Submit Button --}}
                         <div class="flex items-center gap-4 mt-4">
                             <a href="{{ route('dokter.jadwal_periksa.index') }}" class="btn btn-secondary">

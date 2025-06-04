@@ -31,7 +31,6 @@ class JadwalPeriksaController extends Controller
             'hari' => 'required|in:senin,selasa,rabu,kamis,jumat,sabtu',
             'jam_mulai' => 'required|date_format:H:i',
             'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
-            'status' => 'required|boolean',
         ]);
 
         JadwalPeriksa::create([
@@ -39,7 +38,7 @@ class JadwalPeriksaController extends Controller
             'hari' => $request->hari,
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
-            'status' => $request->status,
+            'status' => false,
         ]);
 
         return redirect()->route('dokter.jadwal_periksa.index')->with('success', 'Jadwal periksa berhasil ditambahkan.');
@@ -62,6 +61,13 @@ class JadwalPeriksaController extends Controller
         ]);
 
         $jadwalPeriksa = JadwalPeriksa::findOrFail($id);
+
+        if ($request->status) {
+            JadwalPeriksa::where('id_dokter', Auth::id())
+                ->where('id', '!=', $id)
+                ->where('status', true)
+                ->update(['status' => false]);
+        }
 
         $jadwalPeriksa->update([
             'id_dokter' => Auth::id(),
