@@ -31,19 +31,24 @@
                                     id="namaObat"
                                     name="nama_obat"
                                     value="{{ old('nama_obat') }}"
+                                    required
                                 >
                             </div>
 
                             {{-- Kemasan --}}
                             <div class="mb-3 form-group">
                                 <label for="kemasan">Kemasan</label>
-                                <input
-                                    type="text"
+                                <select
                                     class="rounded form-control"
                                     id="kemasan"
                                     name="kemasan"
-                                    value="{{ old('kemasan') }}"
+                                    required
                                 >
+                                    <option value="" disabled selected>Pilih Kemasan</option>
+                                    <option value="Botol" {{ old('kemasan') == 'Botol' ? 'selected' : '' }}>Botol</option>
+                                    <option value="Tablet" {{ old('kemasan') == 'Tablet' ? 'selected' : '' }}>Tablet</option>
+                                    <option value="Sachet" {{ old('kemasan') == 'Sachet' ? 'selected' : '' }}>Sachet</option>
+                                </select>
                             </div>
 
                             {{-- Harga --}}
@@ -55,6 +60,7 @@
                                     id="harga"
                                     name="harga"
                                     value="{{ old('harga') }}"
+                                    required
                                 >
                             </div>
 

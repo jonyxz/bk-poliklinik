@@ -33,8 +33,16 @@
 
                             <div class="mb-3 form-group">
                                 <label for="editKemasanInput">Kemasan</label>
-                                <input type="text" class="rounded form-control" id="editKemasanInput"
-                                    value="{{ $obat->kemasan }}" name="kemasan">
+                                <select
+                                    class="rounded form-control"
+                                    id="editKemasanInput"
+                                    name="kemasan"
+                                >
+                                    <option value="" disabled>Pilih Kemasan</option>
+                                    <option value="Botol" {{ $obat->kemasan == 'Botol' ? 'selected' : '' }}>Botol</option>
+                                    <option value="Tablet" {{ $obat->kemasan == 'Tablet' ? 'selected' : '' }}>Tablet</option>
+                                    <option value="Sachet" {{ $obat->kemasan == 'Sachet' ? 'selected' : '' }}>Sachet</option>
+                                </select>
                             </div>
 
                             <div class="mb-3 form-group">
