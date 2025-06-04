@@ -44,7 +44,7 @@ class RegisteredUserController extends Controller
 
         if ($existingPatient) {
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'no_ktp' => trans('auth.failed'),
             ]);
         }
 
