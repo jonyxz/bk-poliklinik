@@ -23,16 +23,16 @@
                         <div class="form-group">
                             <label for="formGroupExampleInput">Nomor Rekam Medis</label>
                             <input type="text" class="rounded form-control" id="formGroupExampleInput"
-                                placeholder="Example input" value="2025001-1210" readonly>
+                                placeholder="Example input" value="{{ $no_rm }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="dokterSelect">Dokter</label>
                             <select class="form-control" id="dokterSelect" name="id_jadwal_periksa" required>
-                                <option value="">Pilih Dokter</option>
+                                <option value=""  disabled selected>Pilih Dokter</option>
                                 @foreach ($jadwalPeriksas as $jadwal)
                                     @if ($jadwal->dokter) 
                                         <option value="{{ $jadwal->id }}">
-                                            {{ $jadwal->dokter->nama }} | {{ $jadwal->hari }}, {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }}
+                                            {{ $jadwal->dokter->nama }} - spesialis {{ $jadwal->dokter->poli }} | {{ $jadwal->hari }}, {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }}
                                         </option>
                                     @endif
                                 @endforeach
@@ -40,15 +40,13 @@
                         </div>
                         <div class="form-group">
                             <label for="keluhan">Keluhan</label>
-                            <textarea class="form-control" id="keluhan" rows="3" required></textarea>
+                            <textarea class="form-control" id="keluhan" rows="3" name="keluhan" required></textarea>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-
-                            @if (session('status') === 'janji-periksa-created')
-                                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                                    class="text-sm text-gray-600">{{ __('Berhasil Dibuat.') }}</p>
-                            @endif
+                        <div class="flex items-center gap-4 mt-4">
+                            <a href="{{ route('pasien.janji_periksa.index') }}" class="btn btn-secondary">
+                                Batal
+                            </a>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
                 </section>

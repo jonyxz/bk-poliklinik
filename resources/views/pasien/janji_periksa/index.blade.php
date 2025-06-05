@@ -47,7 +47,7 @@
                                             {{ $loop->iteration }}
                                         </th>
                                         <td class="align-middle text-start">
-                                            {{ ucfirst($janji->no_rm) }}
+                                            {{ ($no_rm) }}
                                         </td>
                                         <td class="align-middle text-start">
                                             {{ $janji->jadwalPeriksa->dokter->nama ?? 'Tidak tersedia' }}
