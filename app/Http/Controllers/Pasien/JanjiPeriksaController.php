@@ -15,8 +15,18 @@ class JanjiPeriksaController extends Controller
         $janjiPeriksas = JanjiPeriksa::with('pasien')
             ->where('id_pasien', Auth::id())
             ->get();
-    
-        return view('pasien.janji_periksa.index', compact('janjiPeriksas'));
+        $dokters = User::with([
+            'jadwalPeriksas' => function ($query) {
+                $query->where('status', true);
+            },
+        ])
+        ->where('role', 'dokter')
+        ->get();
+        $no_rm = Auth::user()->no_rm;
+        return view('pasien.janji_periksa.index', compact('janjiPeriksas'))->with([
+            'no_rm' => $no_rm,
+            'dokters' => $dokters,
+        ]);
     }
 
     public function create()
