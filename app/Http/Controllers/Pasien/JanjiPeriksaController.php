@@ -17,7 +17,9 @@ class JanjiPeriksaController extends Controller
         $janjiPeriksas = JanjiPeriksa::with(['jadwalPeriksa.dokter', 'pasien'])
             ->where('id_pasien', Auth::id())
             ->get();
-        return view('pasien.janji_periksa.index', compact('janjiPeriksas'));
+        $no_rm = Auth::user()->no_rm;
+
+        return view('pasien.janji_periksa.index', compact('janjiPeriksas', 'no_rm'));
     }
 
     public function create()
@@ -50,32 +52,40 @@ class JanjiPeriksaController extends Controller
             'no_antrian' => $noAntrian,
         ]);
 
-        return Redirect::route('pasien.janji-periksa.index')->with('status', 'janji-periksa-created');
+        return Redirect::route('pasien.janji_periksa.index')->with('status', 'janji_periksa-created');
     }
 
     public function edit($id)
     {
-        $janjiPeriksa = JanjiPeriksa::findOrFail($id);
-        $pasiens = User::where('role', 'pasien')->get();
-        return view('pasien.janji_periksa.edit', compact('janjiPeriksa', 'pasiens'));
+        $janjiPeriksa = JanjiPeriksa::with('jadwalPeriksa.dokter')->findOrFail($id);
+        $jadwalPeriksas = JadwalPeriksa::with('dokter')
+            ->where('status', true)
+            ->get();
+
+        $no_rm = Auth::user()->no_rm;
+
+        return view('pasien.janji_periksa.edit')->with([
+            'janjiPeriksa' => $janjiPeriksa,
+            'jadwalPeriksas' => $jadwalPeriksas,
+            'no_rm' => $no_rm,
+        ]);
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'keluhan' => 'required|string|max:255',
-            'no_antrian' => 'nullable|integer',
+        $validatedData = $request->validate([
+            'id_jadwal_periksa' => 'required|exists:jadwal_periksas,id',
+            'keluhan' => 'required',
         ]);
 
         $janjiPeriksa = JanjiPeriksa::findOrFail($id);
 
         $janjiPeriksa->update([
-            'id_pasien' => Auth::id(),
-            'keluhan' => $request->keluhan,
-            'no_antrian' => $request->no_antrian,
+            'id_jadwal_periksa' => $validatedData['id_jadwal_periksa'],
+            'keluhan' => $validatedData['keluhan'],
         ]);
 
-        return redirect()->route('pasien.janji_periksa.index')->with('success', 'Janji periksa berhasil diperbarui.');
+        return Redirect::route('pasien.janji_periksa.index')->with('status', 'janji_periksa-updated');
     }
 
     public function destroy($id)
