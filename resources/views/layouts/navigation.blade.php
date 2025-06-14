@@ -27,6 +27,9 @@
                         <x-nav-link :href="route('dokter.jadwal_periksa.index')" :active="request()->routeIs('dokter.jadwal_periksa.index')">
                             {{ __('Jadwal Periksa') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('dokter.periksa.index')" :active="request()->routeIs('dokter.periksa.index')">
+                            {{ __('Periksa') }}
+                        </x-nav-link>
                     @elseif(Auth::user()->role == 'pasien')
                             <x-nav-link :href="route('pasien.dashboard')" :active="request()->routeIs('pasien.dashboard')">
                                 {{ __('Dashboard') }}
@@ -96,6 +99,9 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('dokter.jadwal_periksa.index')" :active="request()->routeIs('dokter.jadwal_periksa.index')">
                     {{ __('Jadwal Periksa') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('dokter.periksa.index')" :active="request()->routeIs('dokter.periksa.index')">
+                    {{ __('Periksa') }}
                 </x-responsive-nav-link>
             @elseif(Auth::user()->role == 'pasien')
                 <x-responsive-nav-link :href="route('pasien.dashboard')" :active="request()->routeIs('pasien.dashboard')">

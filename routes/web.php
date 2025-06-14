@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dokter\ObatController;
 use App\Http\Controllers\Dokter\JadwalPeriksaController;
+use App\Http\Controllers\Dokter\PeriksaController;
 use App\Http\Controllers\Pasien\JanjiPeriksaController;
 
 Route::get('/', function () {
@@ -43,6 +44,11 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function () 
         Route::patch('/{id}', [JadwalPeriksaController::class, 'update'])->name('dokter.jadwal_periksa.update');
         Route::delete('/{id}', [JadwalPeriksaController::class, 'destroy'])->name('dokter.jadwal_periksa.destroy');
         Route::patch('/jadwal_periksa/{id}/toggle-status', [JadwalPeriksaController::class, 'toggleStatus'])->name('dokter.jadwal_periksa.toggleStatus');
+    });
+    Route::prefix('periksa')->group(function () {
+        Route::get('/', [PeriksaController::class, 'index'])->name('dokter.periksa.index');
+        Route::get('/{janjiPeriksa}/create', [PeriksaController::class, 'create'])->name('dokter.periksa.create');
+        Route::post('/{id}/store', [PeriksaController::class, 'store'])->name('dokter.periksa.store');
     });
 });
 

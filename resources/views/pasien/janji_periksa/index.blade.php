@@ -55,13 +55,10 @@
                                         <td class="align-middle text-start">
                                             {{ $janji->keluhan }}
                                         </td>
-                                        <td class="flex items-center gap-2">
-                                            {{-- Button Edit --}}
+                                        {{-- <td class="flex items-center gap-2">
                                             <a href="{{ route('pasien.janji_periksa.edit', $janji->id) }}" class="btn btn-secondary btn-sm">
                                                 Edit
                                             </a>
-                                        
-                                            {{-- Button Delete --}}
                                             <form action="{{ route('pasien.janji_periksa.destroy', $janji->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -69,7 +66,7 @@
                                                     Delete
                                                 </button>
                                             </form>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
