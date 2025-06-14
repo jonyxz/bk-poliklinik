@@ -16,8 +16,8 @@ class DokterSeeder extends Seeder
     {
         $dokters = [
             [
-                'nama' => 'Dr. Budi Santoso, Sp.PD',
-                'email' => 'budi.santoso@klinik.com',
+                'nama' => 'Dr. Koh Budi, Sp.PD',
+                'email' => 'koh.budi@klinik.com',
                 'password' => Hash::make('dokter123'),
                 'role' => 'dokter',
                 'alamat' => 'Jl. Pahlawan No. 123, Jakarta Selatan',
