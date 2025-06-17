@@ -16,7 +16,7 @@ class ObatSeeder extends Seeder
             [
                 'nama_obat' => 'Paracetamol',
                 'kemasan'   => 'Tablet',
-                'harga'     => 5000,
+                'harga'     => 7000,
             ],
             [
                 'nama_obat' => 'Amoxicillin',
@@ -36,6 +36,11 @@ class ObatSeeder extends Seeder
             [
                 'nama_obat' => 'Cetirizine',
                 'kemasan'   => 'Tablet',
+                'harga'     => 7000,
+            ],
+            [
+                'nama_obat' => 'Komik',
+                'kemasan'   => 'Botol',
                 'harga'     => 7000,
             ],
         ];

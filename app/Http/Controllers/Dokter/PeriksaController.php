@@ -35,16 +35,27 @@ class PeriksaController extends Controller
     {
         $request->validate([
             'hasil' => 'required',
-            'biaya' => 'required|numeric',
             'obat' => 'array',
+            'obat.*' => 'integer|exists:obats,id',
         ]);
+
         $janji = JanjiPeriksa::findOrFail($id);
+
+        $totalObat = 0;
+        if ($request->has('obat')) {
+            $obatList = Obat::whereIn('id', $request->obat)->get();
+            $totalObat = $obatList->sum('harga');
+        }
+
+        $biayaPeriksa = 150000 + $totalObat;
+
         $periksa = Periksa::create([
             'id_janji_periksa' => $janji->id,
             'tgl_periksa' => now(),
             'catatan' => $request->hasil,
-            'biaya_periksa' => $request->biaya,
+            'biaya_periksa' => $biayaPeriksa,
         ]);
+
         if ($request->has('obat')) {
             foreach ($request->obat as $id_obat) {
                 DetailPeriksa::create([
@@ -53,6 +64,7 @@ class PeriksaController extends Controller
                 ]);
             }
         }
+
         return redirect()->route('dokter.periksa.index')->with('status', 'periksa-selesai');
     }
 }
