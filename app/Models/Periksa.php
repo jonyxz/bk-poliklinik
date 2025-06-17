@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Console\ManuallyFailedException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -19,4 +20,9 @@ class Periksa extends Model
     {
         return $this->belongsTo(JanjiPeriksa::class, 'id_janji_periksa');
     }
+    public function detailPeriksas()
+    {
+        return $this->hasMany(DetailPeriksa::class, 'id_periksa');
+    }
+    
 }
