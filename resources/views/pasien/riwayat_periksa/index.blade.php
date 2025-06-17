@@ -35,7 +35,7 @@
                                 <tr>
                                     <th scope="row" class="align-middle text-start">{{ $loop->iteration }}</th>
                                     <td class="align-middle text-start">
-                                        {{ $janjiPeriksa->jadwalPeriksa->dokter->polis->nama }}</td>
+                                        {{ $janjiPeriksa->jadwalPeriksa->dokter->polis->nama ?? 'NA' }}</td>
                                     <td class="align-middle text-start">
                                         {{ $janjiPeriksa->jadwalPeriksa->dokter->nama }}</td>
                                     <td class="align-middle text-start">{{ $janjiPeriksa->jadwalPeriksa->hari }}</td>
@@ -81,7 +81,7 @@
                                                             <ul class="list-group">
                                                                 <li class="list-group-item">
                                                                     <strong>Poliklinik:</strong>
-                                                                    {{ $janjiPeriksa->jadwalPeriksa->dokter->polis->nama }}
+                                                                    {{ $janjiPeriksa->jadwalPeriksa->dokter->polis->nama ?? 'NA' }}
                                                                 </li>
                                                                 <li class="list-group-item">
                                                                     <strong>Nama Dokter:</strong>

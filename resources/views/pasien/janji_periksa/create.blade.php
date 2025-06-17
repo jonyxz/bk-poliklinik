@@ -32,7 +32,7 @@
                                 @foreach ($jadwalPeriksas as $jadwal)
                                     @if ($jadwal->dokter) 
                                         <option value="{{ $jadwal->id }}">
-                                            {{ $jadwal->dokter->nama }} - spesialis {{ $jadwal->dokter->poli }} | {{ $jadwal->hari }}, {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }}
+                                            {{ $jadwal->dokter->nama }} - spesialis {{ $jadwal->dokter->polis->nama ?? "NA" }} | {{ $jadwal->hari }}, {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }}
                                         </option>
                                     @endif
                                 @endforeach

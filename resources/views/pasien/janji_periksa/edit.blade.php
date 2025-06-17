@@ -37,7 +37,7 @@
                                     <option value=""  disabled selected>Pilih Dokter</option>
                                     @foreach ($jadwalPeriksas as $jadwal)
                                         <option value="{{ $jadwal->id }}" {{ $janjiPeriksa->id_jadwal_periksa == $jadwal->id ? 'selected' : '' }}>
-                                            {{ $jadwal->dokter->nama }} | {{ $jadwal->hari }}, {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }}
+                                            {{ $jadwal->dokter->nama }} - spesialis {{ $jadwal->dokter->polis->nama ?? 'NA' }} | {{ $jadwal->hari }}, {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }}
                                         </option>
                                     @endforeach
                                 </select>
