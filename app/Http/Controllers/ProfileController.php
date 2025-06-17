@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Poli;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -16,8 +18,10 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $polis = Poli::all();
         return view('profile.edit', [
             'user' => $request->user(),
+            'polis' => $polis,
         ]);
     }
 
@@ -38,11 +42,7 @@ class ProfileController extends Controller
 
         if ($user->role === 'dokter') {
             $request->validate([
-                'poli' => 'nullable|string|max:50',
-            ]);
-        } elseif ($user->role === 'pasien') {
-            $request->validate([
-                'no_rm' => 'nullable|string|max:25',
+                'id_poli' => 'nullable|exists:polis,id',
             ]);
         }
 
@@ -55,9 +55,7 @@ class ProfileController extends Controller
         ]);
 
         if ($user->role === 'dokter') {
-            $user->poli = $request->poli;
-        } elseif ($user->role === 'pasien') {
-            $user->no_rm = $request->no_rm;
+            $user->id_poli = $request->id_poli;
         }
 
         $user->save();

@@ -67,17 +67,23 @@
 
         @if ($user->role === 'dokter')
             <div>
-                <x-input-label for="poli" :value="__('Poli')" />
-                <x-text-input id="poli" name="poli" type="text" class="mt-1 block w-full" :value="old('poli', $user->poli)" autocomplete="poli" />
-                <x-input-error class="mt-2" :messages="$errors->get('poli')" />
+                <x-input-label for="id_poli" :value="__('Poli')" />
+                <select id="id_poli" name="id_poli" class="mt-1 block w-full rounded border-gray-300">
+                    <option value="">-- Pilih Poli --</option>
+                    @foreach($polis as $poli)
+                        <option value="{{ $poli->id }}" {{ old('id_poli', $user->id_poli) == $poli->id ? 'selected' : '' }}>
+                            {{ $poli->nama }}
+                        </option>
+                    @endforeach
+                </select>
+                <x-input-error class="mt-2" :messages="$errors->get('id_poli')" />
             </div>
         @endif
 
         @if ($user->role === 'pasien')
             <div>
                 <x-input-label for="no_rm" :value="__('No RM')" />
-                <x-text-input id="no_rm" name="no_rm" type="text" class="mt-1 block w-full" :value="old('no_rm', $user->no_rm)" autocomplete="no_rm" />
-                <x-input-error class="mt-2" :messages="$errors->get('no_rm')" />
+                <x-text-input id="no_rm" name="no_rm" type="text" class="mt-1 block w-full bg-gray-100" :value="$user->no_rm" disabled readonly />
             </div>
         @endif
 
