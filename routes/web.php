@@ -6,6 +6,7 @@ use App\Http\Controllers\Dokter\ObatController;
 use App\Http\Controllers\Dokter\JadwalPeriksaController;
 use App\Http\Controllers\Dokter\PeriksaController;
 use App\Http\Controllers\Pasien\JanjiPeriksaController;
+use App\Http\Controllers\Pasien\RiwayatPeriksaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -64,6 +65,12 @@ Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->group(function () 
         Route::get('/{id}/edit', [JanjiPeriksaController::class, 'edit'])->name('pasien.janji_periksa.edit');
         Route::patch('/{id}', [JanjiPeriksaController::class, 'update'])->name('pasien.janji_periksa.update');
         Route::delete('/{id}', [JanjiPeriksaController::class, 'destroy'])->name('pasien.janji_periksa.destroy');
+    });
+
+    Route::prefix('riwayat-periksa')->group(function(){
+        Route::get('/', [RiwayatPeriksaController::class, 'index'])->name('pasien.riwayat_periksa.index');
+        Route::get('/{id}/detail', [RiwayatPeriksaController::class, 'detail'])->name('pasien.riwayat_periksa.detail');
+        Route::get('/{id}/riwayat', [RiwayatPeriksaController::class, 'riwayat'])->name('pasien.riwayat_periksa.riwayat');
     });
 });
 

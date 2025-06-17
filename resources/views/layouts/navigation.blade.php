@@ -37,6 +37,9 @@
                             <x-nav-link :href="route('pasien.janji_periksa.index')" :active="request()->routeIs('pasien.janji_periksa.index')">
                                 {{ __('Janji Periksa') }}
                             </x-nav-link>
+                            <x-nav-link :href="route('pasien.riwayat_periksa.index')" :active="request()->routeIs('pasien.riwayat_periksa.index')">
+                                {{ __('Riwayat Periksa') }}
+                            </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -109,6 +112,9 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('pasien.janji_periksa.index')" :active="request()->routeIs('pasien.janji_periksa.index')">
                     {{ __('Janji Periksa') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('pasien.riwayat_periksa.index')" :active="request()->routeIs('pasien.riwayat_periksa.index')">
+                    {{ __('Riwayat Periksa') }}
                 </x-responsive-nav-link>
             @endif
         </div>
