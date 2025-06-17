@@ -84,4 +84,11 @@ class ObatController extends Controller
 
         return redirect()->route('dokter.obat.index')->with('status', 'obat-restored');
     }
+
+    public function forceDelete($id)
+    {
+        $obat = Obat::onlyTrashed()->findOrFail($id);
+        $obat->forceDelete();
+        return redirect()->route('dokter.obat.trash')->with('status', 'obat-deleted-permanently');
+    }
 }

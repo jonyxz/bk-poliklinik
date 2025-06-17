@@ -36,6 +36,8 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function () 
         Route::patch('/{id}', [ObatController::class, 'update'])->name('dokter.obat.update');
         Route::delete('/{id}', [ObatController::class, 'destroy'])->name('dokter.obat.destroy');
         Route::get('/trash', [ObatController::class, 'trash'])->name('dokter.obat.trash');
+        Route::put('/dokter/obat/{id}/restore', [ObatController::class, 'restore'])->name('dokter.obat.restore');
+        Route::delete('/dokter/obat/{id}/force-delete', [ObatController::class, 'forceDelete'])->name('dokter.obat.forceDelete');
     });
 
     Route::prefix('jadwal-periksa')->group(function () {
