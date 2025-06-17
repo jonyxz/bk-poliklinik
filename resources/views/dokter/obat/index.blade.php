@@ -14,6 +14,7 @@
                             {{ __('Daftar Obat') }}
                         </h2>
                         <div class="flex-col items-center justify-center text-center">
+                            <a href="{{ route('dokter.obat.trash') }}" class="btn btn-secondary">Lihat Obat Terhapus</a>
                             <a href="{{ route('dokter.obat.create') }}" class="btn btn-primary">Tambah Obat</a>
 
                             @if (session('status') === 'obat-created')
