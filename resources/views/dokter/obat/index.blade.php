@@ -56,20 +56,21 @@
                                     <td class="align-middle text-start">
                                         {{ 'Rp' . number_format($obat->harga, 0, ',', '.') }}
                                     </td>
-                                    <td class="flex items-center gap-3">
-                                        {{-- Button Edit --}}
-                                        <a href="{{ route('dokter.obat.edit', $obat->id) }}" class="btn btn-secondary btn-sm">
-                                            Edit
-                                        </a>
-
-                                        {{-- Button Delete --}}
-                                        <form action="{{ route('dokter.obat.destroy', $obat->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                Delete
-                                            </button>
-                                        </form>
+                                    <td class="align-middle text-start">
+                                        <div class="flex items-center gap-3">
+                                            {{-- Button Edit --}}
+                                            <a href="{{ route('dokter.obat.edit', $obat->id) }}" class="btn btn-secondary btn-sm">
+                                                Edit
+                                            </a>
+                                            {{-- Button Delete --}}
+                                            <form action="{{ route('dokter.obat.destroy', $obat->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

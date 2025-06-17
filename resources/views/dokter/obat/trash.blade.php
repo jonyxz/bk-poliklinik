@@ -13,7 +13,7 @@
                         <h2 class="text-lg font-medium text-gray-900">
                             {{ __('Daftar Obat Terhapus') }}
                         </h2>
-                        <div>
+                        <div class="flex-col items-center justify-center text-center">
                             <a href="{{ route('dokter.obat.index') }}" class="btn btn-secondary">Kembali ke Daftar Obat</a>
                         </div>
                     </header>
