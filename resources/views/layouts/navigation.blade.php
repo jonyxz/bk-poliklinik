@@ -34,7 +34,7 @@
                             <x-nav-link :href="route('pasien.dashboard')" :active="request()->routeIs('pasien.dashboard')">
                                 {{ __('Dashboard') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('pasien.janji_periksa.index')" :active="request()->routeIs('pasien.janji_periksa.index')">
+                            <x-nav-link :href="route('pasien.janji_periksa.create')" :active="request()->routeIs('pasien.janji_periksa.create')">
                                 {{ __('Janji Periksa') }}
                             </x-nav-link>
                             <x-nav-link :href="route('pasien.riwayat_periksa.index')" :active="request()->routeIs('pasien.riwayat_periksa.index')">
@@ -110,7 +110,7 @@
                 <x-responsive-nav-link :href="route('pasien.dashboard')" :active="request()->routeIs('pasien.dashboard')">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('pasien.janji_periksa.index')" :active="request()->routeIs('pasien.janji_periksa.index')">
+                <x-responsive-nav-link :href="route('pasien.janji_periksa.create')" :active="request()->routeIs('pasien.janji_periksa.create')">
                     {{ __('Janji Periksa') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('pasien.riwayat_periksa.index')" :active="request()->routeIs('pasien.riwayat_periksa.index')">

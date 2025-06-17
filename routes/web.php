@@ -62,12 +62,12 @@ Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->group(function () 
     })->name('pasien.dashboard');
 
     Route::prefix('janji-periksa')->group(function () {
-        Route::get('/', [JanjiPeriksaController::class, 'Index'])->name('pasien.janji_periksa.index');
-        Route::get('/create', [JanjiPeriksaController::class, 'create'])->name('pasien.janji_periksa.create');
+        // Route::get('/', [JanjiPeriksaController::class, 'Index'])->name('pasien.janji_periksa.index');
+        Route::get('/', [JanjiPeriksaController::class, 'create'])->name('pasien.janji_periksa.create');
         Route::post('/', [JanjiPeriksaController::class, 'store'])->name('pasien.janji_periksa.store');
-        Route::get('/{id}/edit', [JanjiPeriksaController::class, 'edit'])->name('pasien.janji_periksa.edit');
-        Route::patch('/{id}', [JanjiPeriksaController::class, 'update'])->name('pasien.janji_periksa.update');
-        Route::delete('/{id}', [JanjiPeriksaController::class, 'destroy'])->name('pasien.janji_periksa.destroy');
+        // Route::get('/{id}/edit', [JanjiPeriksaController::class, 'edit'])->name('pasien.janji_periksa.edit');
+        // Route::patch('/{id}', [JanjiPeriksaController::class, 'update'])->name('pasien.janji_periksa.update');
+        // Route::delete('/{id}', [JanjiPeriksaController::class, 'destroy'])->name('pasien.janji_periksa.destroy');
     });
 
     Route::prefix('riwayat-periksa')->group(function(){

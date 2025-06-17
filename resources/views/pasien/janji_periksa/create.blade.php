@@ -43,10 +43,17 @@
                             <textarea class="form-control" id="keluhan" rows="3" name="keluhan" required></textarea>
                         </div>
                         <div class="flex items-center gap-4 mt-4">
-                            <a href="{{ route('pasien.janji_periksa.index') }}" class="btn btn-secondary">
+                            {{-- <a href="{{ route('pasien.janji_periksa.index') }}" class="btn btn-secondary">
                                 Batal
-                            </a>
+                            </a> --}}
                             <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                        <div class="flex items-center gap-4 mt-4">
+                        @if (session('status'))
+                            <div class="mb-4 px-4 py-2 rounded bg-green-100 text-green-800">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         </div>
                     </form>
                 </section>
