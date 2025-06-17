@@ -47,28 +47,36 @@
                                 required></textarea>
                         </div>
 
-                        <div>
-                            <label for="biaya" class="block text-gray-800 font-medium mb-1">Biaya Periksa</label>
-                            <div class="flex items-center">
-                                <span
-                                    class="inline-block px-3 py-2 bg-gray-100 border border-r-0 border-gray-300 rounded-l-md text-sm text-gray-700">Rp</span>
-                                <input type="number" name="biaya" id="biaya"
-                                    class="w-full border border-gray-300 rounded-r-md p-2 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition"
-                                    required>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="obat" class="block text-gray-800 font-medium mb-1">Resep Obat</label>
-                            <select name="obat[]" id="obat" multiple
-                                class="appearance-none w-full border border-gray-300 rounded-md p-2 bg-white focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition">
+                        <div class="mb-3 form-group">
+                            <label for="obat">Pilih Obat</label>
+                            <select
+                                class="rounded form-control"
+                                id="obat-dropdown"
+                                name="obat[]"
+                                multiple
+                                required
+                                size="5"
+                            >
                                 @foreach($obats as $obat)
-                                    <option class="text-gray-700 text-base p-1 bg-white dark:text-white dark:bg-gray-700"
-                                        value="{{ $obat->id }}">
-                                        {{ $obat->nama_obat }}
+                                    <option value="{{ $obat->id }}" data-harga="{{ $obat->harga }}">
+                                        {{ $obat->nama_obat }} (Rp{{ number_format($obat->harga,0,',','.') }})
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="mb-3 form-group">
+                            <label for="biaya_periksa">Biaya Periksa</label>
+                            <input
+                                type="text"
+                                class="rounded form-control"
+                                id="biaya_periksa"
+                                name="biaya"
+                                value="150000"
+                                readonly
+                                required
+                            >
+                            <small class="text-gray-500">Biaya dasar Rp150.000 + total harga obat.</small>
                         </div>
 
                         <div class="flex items-center gap-4 pt-4">
@@ -86,3 +94,15 @@
         </div>
     </div>
 </x-app-layout>
+
+
+<script>
+document.getElementById('obat-dropdown').addEventListener('change', function() {
+    let dasar = 150000;
+    let totalObat = 0;
+    Array.from(this.selectedOptions).forEach(option => {
+        totalObat += parseInt(option.getAttribute('data-harga')) || 0;
+    });
+    document.getElementById('biaya_periksa').value = dasar + totalObat;
+});
+</script>

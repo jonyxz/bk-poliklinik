@@ -45,9 +45,10 @@
                                     required
                                 >
                                     <option value="" disabled selected>Pilih Kemasan</option>
-                                    <option value="Botol" {{ old('kemasan') == 'Botol' ? 'selected' : '' }}>Botol</option>
                                     <option value="Tablet" {{ old('kemasan') == 'Tablet' ? 'selected' : '' }}>Tablet</option>
+                                    <option value="Kapsul" {{ old('kemasan') == 'Kapsul' ? 'selected' : '' }}>Kapsul</option>
                                     <option value="Sachet" {{ old('kemasan') == 'Sachet' ? 'selected' : '' }}>Sachet</option>
+                                    <option value="Botol" {{ old('kemasan') == 'Botol' ? 'selected' : '' }}>Botol</option>
                                 </select>
                             </div>
 
