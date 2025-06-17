@@ -15,7 +15,7 @@ class PeriksaController extends Controller
     public function index()
     {
         $dokterId = Auth::user()->id;
-        $janjiPeriksas = JanjiPeriksa::with(['jadwalPeriksa', 'pasien'])
+        $janjiPeriksas = JanjiPeriksa::with(['jadwalPeriksa', 'pasien', 'periksa'])
             ->whereHas('jadwalPeriksa', function ($q) use ($dokterId) {
                 $q->where('id_dokter', $dokterId);
             })

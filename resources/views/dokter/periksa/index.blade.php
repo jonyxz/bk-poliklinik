@@ -39,10 +39,10 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($janjiPeriksas as $janji)
+                                @forelse ($janjiPeriksas as $janji)
                                     @php
                                         $sudahDiperiksa = $janji->periksa !== null;
-                                        $noAntrianUtama = $janjiPeriksas->filter(function($item) {
+                                        $noAntrian = $janjiPeriksas->filter(function($item) {
                                             return $item->periksa === null;
                                         })->min(function($item) {
                                             return (int) $item->no_antrian;
@@ -69,20 +69,23 @@
                                         <td class="px-4 py-2 align-middle">{{ $janji->keluhan }}</td>
                                         <td class="px-4 py-2 align-middle">
                                             @if($sudahDiperiksa)
-                                                <span class="px-3 py-1 bg-gray-300 text-gray-600 rounded text-sm cursor-not-allowed">Sudah Diperiksa</span>
+                                                <button class="px-3 py-1 bg-gray-300 text-gray-600 rounded text-sm cursor-not-allowed" disabled>
+                                                    Sudah Diperiksa
+                                                </button>
                                             @else
                                                 <a href="{{ route('dokter.periksa.create', $janji->id) }}"
-                                                    class="px-3 py-1 @if((int)$janji->no_antrian === (int)$noAntrianUtama) bg-success @else bg-danger @endif text-white rounded transition text-sm font-semibold">
+                                                class="px-3 py-1 @if((int)$janji->no_antrian === (int)$noAntrian) bg-success @else bg-danger @endif text-white rounded transition text-sm font-semibold">
                                                     Periksa
                                                 </a>
                                             @endif
                                         </td>
                                     </tr>
+                                @empty
                                     <tr>
                                         <td colspan="6" class="px-4 py-8 text-center text-gray-500">Belum ada janji periksa
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

@@ -43,7 +43,7 @@
                         <div>
                             <label for="hasil" class="block text-gray-800 font-medium mb-1">Hasil Periksa</label>
                             <textarea id="hasil" name="hasil" rows="4"
-                                class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition"
+                                class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 btn-blue transition"
                                 required></textarea>
                         </div>
 
