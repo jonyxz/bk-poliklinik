@@ -8,12 +8,23 @@ use Illuminate\Http\Request;
 
 class ObatController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $obats = Obat::all();
-        return view('dokter.obat.index')->with([
-            'obats' => $obats,
-        ]);
+        $search = $request->get('search');
+        $sortBy = $request->get('sort_by', 'id');
+        $sortOrder = $request->get('sort_order', 'desc');
+
+        $obats = Obat::query()
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($q) use ($search) {
+                    $q->where('nama_obat', 'like', "%{$search}%")
+                    ->orWhere('kemasan', 'like', "%{$search}%");
+                });
+            })
+            ->orderBy($sortBy, $sortOrder)
+            ->get();
+
+        return view('dokter.obat.index', compact('obats', 'search', 'sortBy', 'sortOrder'));
     }
 
     public function create()

@@ -13,6 +13,27 @@
                         <h2 class="text-lg font-medium text-gray-900">
                             {{ __('Daftar Obat') }}
                         </h2>
+                        <form method="GET" class="d-flex">
+                            <input type="text" name="search" value="{{ $search }}" placeholder="Cari obat..." class="form-control me-2">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                            @if($search)
+                                <a href="{{ route('dokter.obat.index') }}" class="btn btn-secondary ms-2">Reset</a>
+                            @endif
+                        </form>
+
+                        <form method="GET" class="d-flex">
+                            <input type="hidden" name="search" value="{{ $search }}">
+                            <select name="sort_by" class="form-select me-2">
+                                <option value="nama_obat" {{ $sortBy == 'nama_obat' ? 'selected' : '' }}>Nama Obat</option>
+                                <option value="kemasan" {{ $sortBy == 'kemasan' ? 'selected' : '' }}>Kemasan</option>
+                                <option value="harga" {{ $sortBy == 'harga' ? 'selected' : '' }}>Harga</option>
+                            </select>
+                            <select name="sort_order" class="form-select me-2">
+                                <option value="asc" {{ $sortOrder == 'asc' ? 'selected' : '' }}> a-z </option>
+                                <option value="desc" {{ $sortOrder == 'desc' ? 'selected' : '' }}>z-a</option>
+                            </select>
+                            <button type="submit" class="btn btn-secondary">Sort</button>
+                        </form>
                         <div class="flex-col items-center justify-center text-center">
                             <a href="{{ route('dokter.obat.trash') }}" class="btn btn-secondary">Lihat Obat Terhapus</a>
                             <a href="{{ route('dokter.obat.create') }}" class="btn btn-primary">Tambah Obat</a>
